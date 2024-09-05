@@ -1,7 +1,8 @@
 version: 1.0.0
-debug: true
+log_level: debugstatus
 database:
-  host: localhost
-  port: 5432
-  username: user
-  password: resu
+  psq_ql:
+    host: localhost
+    port: 5432
+    username: user
+    password: resu

@@ -1,22 +1,22 @@
 package main
 
 import (
-	"TestTask/internal"
-	"TestTask/store/adapters/postgresql"
-	"fmt"
+	"TestTask"
 	_ "github.com/lib/pq"
+	"github.com/rs/zerolog/log"
 )
 
 func main() {
-	// Вызываем функцию Load из config.go
-	internal.Load()
-	postgresql.Init()
-	db := postgresql.GetDB()
+	var config *TestTask.Config
+	var err error
+	if config, err = TestTask.LoadConfig(); err != nil {
+		log.Fatal().Err(err)
+	}
 
-	if db != nil {
-		fmt.Println("Подключение к базе данных успешно установлено.")
-	} else {
-		fmt.Println("Не удалось установить соединение с базой данных.")
+	//создаем хранилище?//
+	var main_store *store.Store
+	if main_store, err = store.CreateStore(config.Database); err != nil {
+		return
 	}
 
 }
