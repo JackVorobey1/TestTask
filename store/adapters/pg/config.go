@@ -1,4 +1,4 @@
-package postgresql
+package pg
 
 import (
 	"errors"
@@ -9,13 +9,17 @@ type Config struct {
 	Host     string `yaml:"host"`
 	Port     int    `yaml:"port"`
 	Username string `yaml:"username"`
+	DBname   string `yaml:"dbname"`
 	Password string `yaml:"password"`
 }
 
-/*сюда приходит проверка из файла config.go и продолжает искать ошибки тут*/
-
 // метод Validdate структуры Config
 func (c *Config) Validdate() (err error) {
+
+	if c == nil {
+		return errors.New("Empty adapter config")
+	}
+
 	//удаляет пробелы с начала и конца строки
 	if strings.TrimSpace(c.Host) == "" {
 		err = errors.New("Invalid Version ")

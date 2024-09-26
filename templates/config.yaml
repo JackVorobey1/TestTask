@@ -1,8 +1,9 @@
 version: 1.0.0
 log_level: debugstatus
 database:
-  psq_ql:
-    host: localhost
+  postgres:
+    host: "localhost"
     port: 5432
-    username: user
-    password: resu
+    username: "postgres"
+    dbname: "test_db"
+    password: "postgres"
